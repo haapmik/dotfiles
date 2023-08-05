@@ -34,6 +34,4 @@ local kanagawa = {
   end,
 }
 
-local M = kanagawa
-
-return M
+return kanagawa
