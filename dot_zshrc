@@ -38,6 +38,9 @@ bindkey "^?" backward-delete-char # set backspace to work in all vim modes
 
 # End of lines configured by zsh-newuser-install
 
+# Automatically run tmux if available
+if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then tmux; fi
+
 # Automatically install zsh zi if missing
 if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
   print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
@@ -67,9 +70,13 @@ zi light-mode for @sindresorhus/pure
 zi wait lucid for \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
      z-shell/F-Sy-H \
+     kutsan/zsh-system-clipboard \
   blockf \
      zsh-users/zsh-completions \
   atload"!_zsh_autosuggest_start" \
      zsh-users/zsh-autosuggestions
+
+ZSH_SYSTEM_CLIPBOARD_METHOD=tmux # Using tmux because wsl method is too slow
+ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
 
 zicompinit # <- https://wiki.zshell.dev/docs/guides/commands
