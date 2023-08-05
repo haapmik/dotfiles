@@ -1,0 +1,26 @@
+# Disable system-wide compinit call
+skip_global_compinit=1
+
+# Rust cargo
+. "$HOME/.cargo/env"
+
+# Locally installed binaries
+export PATH="${PATH}:${HOME}/.local/bin"
+
+# Go
+export GOPATH="${HOME}/.local/share/go"
+export PATH="${PATH}:${GOPATH}/bin"
+
+# Nvim Mason
+export MASONPATH="${HOME}/.local/share/nvim/mason"
+export PATH="${PATH}:${MASONPATH}/bin"
+
+# Nodejs npm
+export NPMPATH="${HOME}/.local/share/npm"
+export PATH="${PATH}:${NPMPATH}/bin"
+
+# Add snapd
+export PATH="${PATH}:/snap/bin"
+
+# Add vscode
+export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"

@@ -26,6 +26,15 @@ function M.config()
     },
   }, { mode = "n" })
 
+  -- Window navigation
+  local nvim_tmux_nav = require("nvim-tmux-navigation")
+  wk.register({
+    ["<C-h>"] = { nvim_tmux_nav.NvimTmuxNavigateLeft, "Window - Navigate left" },
+    ["<C-j>"] = { nvim_tmux_nav.NvimTmuxNavigateDown, "Window - Navigate down" },
+    ["<C-k>"] = { nvim_tmux_nav.NvimTmuxNavigateUp, "Window - Navigate up" },
+    ["<C-l>"] = { nvim_tmux_nav.NvimTmuxNavigateRight, "Window - Navigate right" },
+  })
+
   -- With <leader>
   wk.register({
     c = {
