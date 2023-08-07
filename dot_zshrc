@@ -12,7 +12,7 @@ zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-suffixes true
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
-zstyle ':completion:*' max-errors 1
+zstyle ':completion:*' max-errors 2
 zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*' original true
 zstyle ':completion:*' preserve-prefix '//[^/]##/'
@@ -39,7 +39,9 @@ bindkey "^?" backward-delete-char # set backspace to work in all vim modes
 # End of lines configured by zsh-newuser-install
 
 # Automatically run tmux if available
-if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then tmux; fi
+if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then
+    tmux attach || tmux new -s "${USER}_$(date +"%Y-%M-%d")"
+fi
 
 # Automatically install zsh zi if missing
 if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
