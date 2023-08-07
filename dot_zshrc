@@ -29,7 +29,7 @@ compinit
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-setopt beep extendedglob nomatch notify
+setopt beep extendedglob nomatch notify correct
 unsetopt autocd
 
 # Use vim like key bindings
@@ -37,6 +37,9 @@ bindkey -v
 bindkey "^?" backward-delete-char # set backspace to work in all vim modes
 
 # End of lines configured by zsh-newuser-install
+
+# Aliases
+alias ls="ls --color"
 
 # Automatically run tmux if available
 if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then
