@@ -1,6 +1,8 @@
 # Disable system-wide compinit call
 skip_global_compinit=1
 
+export EDITOR="/usr/bin/nvim"
+
 # Rust cargo
 . "$HOME/.cargo/env"
 
