@@ -7,4 +7,5 @@ These files are a backup of my current environment and can be used as an example
 Configs are available for
 - [Neovim](https://neovim.io/)
 - [Zsh shell](https://zsh.sourceforge.io/) with [Zi](https://wiki.zshell.dev/)
+    - Zi is based on the zinit plugin manager originally created by [Zdharma](https://github.com/zdharma)
 - [tmux](https://github.com/tmux/tmux/wiki)

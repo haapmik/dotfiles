@@ -64,6 +64,10 @@ function M.config()
   local null_ls = require("null-ls")
   null_ls.setup({})
 
+  local formatting = null_ls.builtins.formatting
+  local diagnostics = null_ls.builtins.diagnostics
+  local code_actions = null_ls.builtins.code_actions
+
   require("mason-null-ls").setup({
     ensure_installed = {
       -- Always prioritize Mason's sources if available
@@ -80,10 +84,15 @@ function M.config()
     handlers = {
       -- Prevent source use unless configuration file
       -- is included in the project root.
-      --function() end, -- disables automatic setup of all null-ls sources
-      rome = handler_rome(null_ls),
+      function() end, -- disables automatic setup of all null-ls sources
       eslint_d = handle_eslint_d(null_ls),
+      --phpcbf = formatting.phpcbf,
+      --phpcs = diagnostics.phpcs,
       prettierd = handle_prettierd(null_ls),
+      rome = handler_rome(null_ls),
+      --rustfmt = formatting.rustfmt,
+      --shellcheck = code_actions.shellcheck,
+      --shfmt = formatting.shfmt,
       stylua = handler_stylua(null_ls),
     },
     automatic_installation = false,
