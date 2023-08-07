@@ -1,0 +1,8 @@
+[init]
+	templateDir = /home/haapmik/.local/share/git/templates
+	defaultBranch = main
+[user]
+	name = Mikko Haapanen
+	email = 26046991+haapmik@users.noreply.github.com
+[core]
+	editor = nvim

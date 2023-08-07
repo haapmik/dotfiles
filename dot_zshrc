@@ -46,8 +46,6 @@ if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then
     tmux attach || tmux new -s "${USER}_$(date +"%Y-%M-%d")"
 fi
 
-bindkey "^l" clear
-
 # Automatically install zsh zi if missing
 if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
   print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"

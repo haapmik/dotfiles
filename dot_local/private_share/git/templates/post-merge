@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+WATCH_FILE_LIST=(
+    package.json
+)
+
+gen_action_alert() {
+    local file="${1}"
+    local action="${2}"
+
+    print "File %s has changed since last pull!\n" "${file}"
+    read -pr "Do you wan't to run ${action}? (y/N) " answer
+
+    if [[ "${answer}" == "y" ]]; then
+        print "\nRunning %s...\n" "${action}"
+        eval "${action}"
+    fi
+}
+
+check_file_logic() {
+    local file="${1}"
+
+    case "${file}" in
+        "cargo.toml")
+            gen_action_alert "${file}" "cargo update"
+            ;;
+        "package.json")
+            gen_action_alert "${file}" "npm install"
+            ;;
+        *)
+            print "File %s has changed since last pull!\n" "${file}"
+            ;;
+    esac
+}
+
+
+main() {
+    changed_file_list="$(git diff-tree -r --name-only ORIG_HEAD HEAD)"
+    local -r changed_file_list
+
+    for file in "${WATCH_FILE_LIST[@]}"; do
+        if echo "${changed_file_list}" | grep --quiet "${file}"; then
+            check_file_logic "${file}"
+        fi
+    done
+}
