@@ -1,7 +1,7 @@
 # Disable system-wide compinit call
 skip_global_compinit=1
 
-source ".zshenv_secrets"
+source "${HOME}/.zshenv_secrets"
 
 export EDITOR="/usr/bin/nvim"
 
