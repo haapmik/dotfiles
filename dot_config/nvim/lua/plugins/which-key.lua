@@ -39,8 +39,8 @@ function M.config()
   wk.register({
     c = {
       name = "Code",
-      ["ö"] = { vim.diagnostic.goto_prev, "Diagnostics - previous" },
-      ["ä"] = { vim.diagnostic.goto_next, "Diagnostics - next" },
+      ["ä"] = { vim.diagnostic.goto_prev, "Diagnostics - previous" },
+      ["ö"] = { vim.diagnostic.goto_next, "Diagnostics - next" },
       f = {
         function()
           vim.lsp.buf.format({ async = false })
