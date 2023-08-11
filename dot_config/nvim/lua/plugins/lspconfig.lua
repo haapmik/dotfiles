@@ -85,6 +85,19 @@ local function get_lsp_client_configs(lsp_client)
     }
   end
 
+  if lsp_client == "sumneko_lua" or lsp_client == "lua_ls" then
+    opts.settings = {
+      Lua = {
+        workspace = {
+          checkThirdParty = false, -- disable those stupid 'luv' prompts
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    }
+  end
+
   return opts
 end
 
