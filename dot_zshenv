@@ -1,7 +1,9 @@
 # Disable system-wide compinit call
 skip_global_compinit=1
 
-source "${HOME}/.zshenv_secrets"
+if [[ -f "${HOME}/.zshenv_secrets" ]]; then
+    source "${HOME}/.zshenv_secrets"
+fi
 
 export EDITOR="/usr/bin/nvim"
 
@@ -11,22 +13,31 @@ export XDG_DATA_HOME="${HOME}/.local/share" # User's /usr/share
 export XDG_STATE_HOME="${HOME}/.local/state"
 export XDG_CACHE_HOME="${HOME}/.cache"      # User's /var/cache
 
-# Rust cargo
-. "$HOME/.cargo/env"
-
 # Locally installed binaries
 export PATH="${PATH}:${HOME}/.local/bin"
 
+# Zsh
+export XDG_ZI_HOME="${XDG_DATA_HOME}/zi"
+export XDG_ZI_CACHE="${XDG_CACHE_HOME}/zi"
+export XDG_ZI_CONFIG="${XDG_CONFIG_HOME}/zi"
+
+# Rust cargo
+export CARGO_HOME="${HOME}/.local/share/cargo"
+export RUSTUP_HOME="${HOME}/.local/share/rustup"
+if [[ -f "${CARGO_HOME}/env" ]]; then
+    . "/home/haapmik/.local/share/cargo/env"
+fi
+
 # Go
-export GOPATH="${HOME}/.local/share/go"
+export GOPATH="${XDG_DATA_HOME}/go"
 export PATH="${PATH}:${GOPATH}/bin"
 
 # Nvim Mason
-export MASONPATH="${HOME}/.local/share/nvim/mason"
+export MASONPATH="${XDG_DATA_HOME}/nvim/mason"
 export PATH="${PATH}:${MASONPATH}/bin"
 
 # Nodejs npm
-export NPMPATH="${HOME}/.local/share/npm"
+export NPMPATH="${XDG_DATA_HOME}/npm"
 export PATH="${PATH}:${NPMPATH}/bin"
 
 # Add snapd
@@ -34,5 +45,5 @@ export PATH="${PATH}:/snap/bin"
 
 # Add WSL paths
 export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"
-export PATH="${PATH}:/mnt/c/Windows/System32"
-export PATH="${PATH}:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+#export PATH="${PATH}:/mnt/c/Windows/System32"
+#export PATH="${PATH}:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
