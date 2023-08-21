@@ -18,7 +18,6 @@ function M.config()
       "pyright",
       "rome",
       "rust_analyzer",
-      "tsserver",
       "efm",
     },
     -- Automatically install servers that were configured via lspconfig

@@ -9,13 +9,6 @@ local M = {
   },
 }
 
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    bufnr = bufnr,
-    async = true,
-  })
-end
-
 local function get_lsp_client_configs(lsp_client)
   local opts = {}
 
@@ -34,7 +27,10 @@ local function get_lsp_client_configs(lsp_client)
         group = augroup,
         buffer = bufnr,
         callback = function()
-          lsp_formatting(bufnr)
+          vim.lsp.buf.format({
+            bufnr = bufnr,
+            async = true,
+          })
         end,
       })
     end
@@ -97,10 +93,32 @@ local function get_lsp_client_configs(lsp_client)
   end
 
   if lsp_client == "efm" then
+    -- General formatters
+    local prettierd = require("efmls-configs.formatters.prettier_d")
+    local rome = {
+      formatCommand = "rome --format --colors off --stdin-file-path ${INPUT}",
+      formatStdin = true,
+      rootMarkers = { "rome.json" },
+    }
     -- Typescript/Javascript
     local eslintd_linter = require("efmls-configs.linters.eslint_d")
+    eslintd_linter.rootMarkers = {
+      ".eslintrc",
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+    }
     local eslintd_formatter = require("efmls-configs.formatters.eslint_d")
-    local prettierd = require("efmls-configs.formatters.prettier_d")
+    eslintd_formatter.rootMarkers = {
+      ".eslintrc",
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+    }
     -- PHP
     local php = require("efmls-configs.linters.php")
     local phpcs = require("efmls-configs.linters.phpcs")
@@ -109,17 +127,19 @@ local function get_lsp_client_configs(lsp_client)
     local rustfmt = require("efmls-configs.formatters.rustfmt")
     -- Python
     local black = require("efmls-configs.formatters.black")
+    local flake8 = require("efmls-configs.linters.flake8")
     -- Lua
     local stylua = require("efmls-configs.formatters.stylua")
 
     local languages = {
-      typescript = { eslintd_linter, eslintd_formatter, pretierd },
-      javascript = { eslintd_linter, eslintd_formatter, pretierd },
-      javascriptreact = { eslintd_linter, eslintd_formatter, pretierd },
-      typescriptreact = { eslintd_linter, eslintd_formatter, pretierd },
+      typescript = { rome, eslintd_linter, eslintd_formatter, prettierd },
+      javascript = { rome, eslintd_linter, eslintd_formatter, prettierd },
+      javascriptreact = { rome, eslintd_linter, eslintd_formatter, prettierd },
+      typescriptreact = { rome, eslintd_linter, eslintd_formatter, prettierd },
       rust = { rustfmt },
+      lua = { stylua },
       php = { php, phpcs, phpcbf },
-      python = { black },
+      python = { black, flake8 },
     }
 
     opts.init_options = {
@@ -132,7 +152,7 @@ local function get_lsp_client_configs(lsp_client)
     }
     opts.settings = {
       filetypes = vim.tbl_keys(languages),
-      rootMarkers = {".git/", ".editorconfig"},
+      rootMarkers = { ".git/", ".editorconfig" },
       languages = languages,
     }
   end

@@ -92,7 +92,7 @@ function M.config()
       t = { "<cmd>TodoTrouble<cr>", "Todo list" },
     },
     T = { "<cmd>Telescope<cr>", "Telescope" },
-  }, { mode = "nv", prefix = "<leader>" })
+  }, { mode = "n", prefix = "<leader>" })
 end
 
 return M
