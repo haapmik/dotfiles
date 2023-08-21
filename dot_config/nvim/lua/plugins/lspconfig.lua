@@ -4,17 +4,15 @@ local M = {
   dependencies = {
     "folke/neodev.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "creativenull/efmls-configs-nvim",
     "b0o/SchemaStore.nvim",
   },
 }
 
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
-    filter = function(client)
-      -- Forces formatting handling to null-ls only
-      return client.name == "null-ls"
-    end,
     bufnr = bufnr,
+    async = true,
   })
 end
 
@@ -95,6 +93,47 @@ local function get_lsp_client_configs(lsp_client)
           enable = false,
         },
       },
+    }
+  end
+
+  if lsp_client == "efm" then
+    -- Typescript/Javascript
+    local eslintd_linter = require("efmls-configs.linters.eslint_d")
+    local eslintd_formatter = require("efmls-configs.formatters.eslint_d")
+    local prettierd = require("efmls-configs.formatters.prettier_d")
+    -- PHP
+    local php = require("efmls-configs.linters.php")
+    local phpcs = require("efmls-configs.linters.phpcs")
+    local phpcbf = require("efmls-configs.formatters.phpcbf")
+    -- Rust
+    local rustfmt = require("efmls-configs.formatters.rustfmt")
+    -- Python
+    local black = require("efmls-configs.formatters.black")
+    -- Lua
+    local stylua = require("efmls-configs.formatters.stylua")
+
+    local languages = {
+      typescript = { eslintd_linter, eslintd_formatter, pretierd },
+      javascript = { eslintd_linter, eslintd_formatter, pretierd },
+      javascriptreact = { eslintd_linter, eslintd_formatter, pretierd },
+      typescriptreact = { eslintd_linter, eslintd_formatter, pretierd },
+      rust = { rustfmt },
+      php = { php, phpcs, phpcbf },
+      python = { black },
+    }
+
+    opts.init_options = {
+      documentFormatting = true,
+      documentRangeFormatting = true,
+      hover = true,
+      documentSymbol = true,
+      codeAction = true,
+      completion = true,
+    }
+    opts.settings = {
+      filetypes = vim.tbl_keys(languages),
+      rootMarkers = {".git/", ".editorconfig"},
+      languages = languages,
     }
   end
 

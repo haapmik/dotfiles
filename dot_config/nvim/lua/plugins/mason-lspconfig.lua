@@ -19,6 +19,7 @@ function M.config()
       "rome",
       "rust_analyzer",
       "tsserver",
+      "efm",
     },
     -- Automatically install servers that were configured via lspconfig
     automatic_installation = true,
