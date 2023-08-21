@@ -16,7 +16,6 @@ function M.config()
       "intelephense",
       "jsonls",
       "pyright",
-      "rome",
       "rust_analyzer",
       "efm",
     },

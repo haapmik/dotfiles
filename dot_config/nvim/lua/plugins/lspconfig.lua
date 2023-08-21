@@ -93,31 +93,36 @@ local function get_lsp_client_configs(lsp_client)
   end
 
   if lsp_client == "efm" then
-    -- General formatters
-    local prettierd = require("efmls-configs.formatters.prettier_d")
+    local prettier = require("efmls-configs.formatters.prettier")
+    prettier.rootMarkers = {
+      ".prettierrc",
+      ".prettierrc.json",
+      ".prettierrc.js",
+      ".prettierrc.yml",
+      ".prettierrc.yaml",
+      ".prettierrc.json5",
+      ".prettierrc.mjs",
+      ".prettierrc.cjs",
+      ".prettierrc.toml",
+    }
+    prettier.requireMarker = true
+
+    local eslint = require("efmls-configs.linters.eslint")
+    eslint.rootMarkers = {
+      ".eslintrc",
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+    }
+    eslint.requireMarker = true
+
     local rome = {
       formatCommand = "rome --format --colors off --stdin-file-path ${INPUT}",
       formatStdin = true,
       rootMarkers = { "rome.json" },
-    }
-    -- Typescript/Javascript
-    local eslintd_linter = require("efmls-configs.linters.eslint_d")
-    eslintd_linter.rootMarkers = {
-      ".eslintrc",
-      ".eslintrc.cjs",
-      ".eslintrc.js",
-      ".eslintrc.json",
-      ".eslintrc.yaml",
-      ".eslintrc.yml",
-    }
-    local eslintd_formatter = require("efmls-configs.formatters.eslint_d")
-    eslintd_formatter.rootMarkers = {
-      ".eslintrc",
-      ".eslintrc.cjs",
-      ".eslintrc.js",
-      ".eslintrc.json",
-      ".eslintrc.yaml",
-      ".eslintrc.yml",
+      requireMarker = true,
     }
     -- PHP
     local php = require("efmls-configs.linters.php")
@@ -132,10 +137,10 @@ local function get_lsp_client_configs(lsp_client)
     local stylua = require("efmls-configs.formatters.stylua")
 
     local languages = {
-      typescript = { rome, eslintd_linter, eslintd_formatter, prettierd },
-      javascript = { rome, eslintd_linter, eslintd_formatter, prettierd },
-      javascriptreact = { rome, eslintd_linter, eslintd_formatter, prettierd },
-      typescriptreact = { rome, eslintd_linter, eslintd_formatter, prettierd },
+      typescript = { rome, eslint, prettier },
+      javascript = { rome, eslint, prettier },
+      javascriptreact = { rome, eslint, prettier },
+      typescriptreact = { rome, eslint, prettier },
       rust = { rustfmt },
       lua = { stylua },
       php = { php, phpcs, phpcbf },
