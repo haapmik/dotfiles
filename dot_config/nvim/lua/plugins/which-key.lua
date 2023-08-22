@@ -3,6 +3,8 @@ local M = {
   event = "VeryLazy",
   dependencies = {
     "lewis6991/hover.nvim",
+    "nvim-neotest/neotest",
+    "nvim-tmux-navigation",
   },
 }
 
@@ -66,7 +68,7 @@ function M.config()
       },
     },
     t = {
-      name = "Test"
+      name = "Test",
       r = { function() neotest.run.run() end, "Run nearest test"},
       R = { function() neotest.run.run(vim.fn.expand("%")) end, "Run the current file" },
       t = { function() neotest.run.stop() end, "Stop nearest test" },

@@ -167,7 +167,12 @@ end
 
 function M.config()
   -- IMPORTANT: this should be the first line!
-  require("neodev").setup({})
+  require("neodev").setup({
+    library = {
+      plugins = { "neotest", },
+      types = true,
+    }
+  })
 
   local lspconfig = require("lspconfig")
   local lsp_client_list = require("mason-lspconfig").get_installed_servers()
