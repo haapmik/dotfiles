@@ -119,7 +119,7 @@ local function get_lsp_client_configs(lsp_client)
     eslint.requireMarker = true
 
     local rome = {
-      formatCommand = "rome --format --colors off --stdin-file-path ${INPUT}",
+      formatCommand = "rome format --colors off --stdin-file-path ${INPUT}",
       formatStdin = true,
       rootMarkers = { "rome.json" },
       requireMarker = true,
@@ -137,7 +137,7 @@ local function get_lsp_client_configs(lsp_client)
     local stylua = require("efmls-configs.formatters.stylua")
 
     local languages = {
-      typescript = { rome, eslint, prettier },
+      typescript = { rome, prettier },
       javascript = { rome, eslint, prettier },
       javascriptreact = { rome, eslint, prettier },
       typescriptreact = { rome, eslint, prettier },
