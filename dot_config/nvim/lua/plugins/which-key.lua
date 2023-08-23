@@ -11,19 +11,20 @@ local M = {
 function M.config()
   local wk = require("which-key")
   local neotest = require("neotest")
+  local hover = require("hover")
 
   wk.setup({})
 
   wk.register({
     K = {
       function()
-        require("hover").hover()
+        hover.hover()
       end,
       "More information",
     },
     ["KS"] = {
       function()
-        require("hover").hover_select()
+        hover.hover_select()
       end,
       "More information (select)",
     },
@@ -69,15 +70,60 @@ function M.config()
     },
     t = {
       name = "Test",
-      r = { function() neotest.run.run() end, "Run nearest test"},
-      R = { function() neotest.run.run(vim.fn.expand("%")) end, "Run the current file" },
-      t = { function() neotest.run.stop() end, "Stop nearest test" },
-      T = { function() neotest.run.stop(vim.fn.expand("%")) end, "Stop the current file" },
-      O = { function() neotest.output_panel.toggle() end, "Toggle output panel" },
-      o = { function() neotest.output({ short = true, }) end, "Open output display" },
-      w = { function() neotest.watch.toggle() end, "Toggle watch to nearest tets" },
-      W = { function() neotest.watch.toggle(vim.fn.expand("%")) end, "Toggle watch to the current file" },
-      s = { function() neotest.summary.toggle() end, "Toggle summary"},
+      r = {
+        function()
+          neotest.run.run()
+        end,
+        "Run nearest test",
+      },
+      R = {
+        function()
+          neotest.run.run(vim.fn.expand("%"))
+        end,
+        "Run the current file",
+      },
+      t = {
+        function()
+          neotest.run.stop()
+        end,
+        "Stop nearest test",
+      },
+      T = {
+        function()
+          neotest.run.stop(vim.fn.expand("%"))
+        end,
+        "Stop the current file",
+      },
+      O = {
+        function()
+          neotest.output_panel.toggle()
+        end,
+        "Toggle output panel",
+      },
+      o = {
+        function()
+          neotest.output({ short = true })
+        end,
+        "Open output display",
+      },
+      w = {
+        function()
+          neotest.watch.toggle()
+        end,
+        "Toggle watch to nearest tets",
+      },
+      W = {
+        function()
+          neotest.watch.toggle(vim.fn.expand("%"))
+        end,
+        "Toggle watch to the current file",
+      },
+      s = {
+        function()
+          neotest.summary.toggle()
+        end,
+        "Toggle summary",
+      },
     },
     f = {
       name = "File",

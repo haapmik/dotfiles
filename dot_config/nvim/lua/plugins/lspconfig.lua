@@ -10,6 +10,7 @@ local M = {
 }
 
 local function get_lsp_client_configs(lsp_client)
+  local util = require("lspconfig").util
   local opts = {}
 
   -- Create augroup for LSP clients
@@ -92,38 +93,37 @@ local function get_lsp_client_configs(lsp_client)
     }
   end
 
+  if lsp_client == "rome" then
+    opts.root_dir = util.root_pattern("rome.json")
+  end
+
   if lsp_client == "efm" then
-    local prettier = require("efmls-configs.formatters.prettier")
-    prettier.rootMarkers = {
+    local prettierd = require("efmls-configs.formatters.prettier_d")
+    prettierd.rootMarkers = {
       ".prettierrc",
       ".prettierrc.json",
       ".prettierrc.js",
-      ".prettierrc.yml",
-      ".prettierrc.yaml",
-      ".prettierrc.json5",
       ".prettierrc.mjs",
       ".prettierrc.cjs",
-      ".prettierrc.toml",
     }
-    prettier.requireMarker = true
+    prettierd.requireMarker = true
 
-    local eslint = require("efmls-configs.linters.eslint")
-    eslint.rootMarkers = {
+    local eslintd = require("efmls-configs.linters.eslint_d")
+    eslintd.rootMarkers = {
       ".eslintrc",
       ".eslintrc.cjs",
       ".eslintrc.js",
       ".eslintrc.json",
-      ".eslintrc.yaml",
-      ".eslintrc.yml",
     }
-    eslint.requireMarker = true
+    eslintd.requireMarker = true
 
     local rome = {
-      formatCommand = "rome format --colors off --stdin-file-path ${INPUT}",
+      formatCommand = "npx rome format --colors off --stdin-file-path ${INPUT}",
       formatStdin = true,
       rootMarkers = { "rome.json" },
       requireMarker = true,
     }
+
     -- PHP
     local php = require("efmls-configs.linters.php")
     local phpcs = require("efmls-configs.linters.phpcs")
@@ -137,10 +137,10 @@ local function get_lsp_client_configs(lsp_client)
     local stylua = require("efmls-configs.formatters.stylua")
 
     local languages = {
-      typescript = { rome, prettier },
-      javascript = { rome, eslint, prettier },
-      javascriptreact = { rome, eslint, prettier },
-      typescriptreact = { rome, eslint, prettier },
+      typescript = { rome, eslintd, prettierd },
+      javascript = { rome, eslintd, prettierd },
+      javascriptreact = { rome, eslintd, prettierd },
+      typescriptreact = { rome, eslintd, prettierd },
       rust = { rustfmt },
       lua = { stylua },
       php = { php, phpcs, phpcbf },
@@ -169,9 +169,9 @@ function M.config()
   -- IMPORTANT: this should be the first line!
   require("neodev").setup({
     library = {
-      plugins = { "neotest", },
+      plugins = { "neotest" },
       types = true,
-    }
+    },
   })
 
   local lspconfig = require("lspconfig")
