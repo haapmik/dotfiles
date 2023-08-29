@@ -12,6 +12,15 @@ vim.opt.updatetime = 300
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.autochdir = true
 
+-- Folding
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99 -- ufo provider needs a large value, can be decreased if required
+vim.opt.foldlevelstart = 1
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+--vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
 -- Blending
 vim.opt.pumblend = 5
 vim.opt.winblend = 5

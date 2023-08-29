@@ -41,6 +41,11 @@ function M.config()
 
   -- With <leader>
   wk.register({
+    b = {
+      name = "Buffer",
+      p = { "<cmd>BufferLinePick<cr>", "Bufferline - pick" },
+      D = { "<cmd>BufferLinePickClose<cr>", "Bufferline - close" },
+    },
     c = {
       name = "Code",
       ["ä"] = { vim.diagnostic.goto_prev, "Diagnostics - previous" },
