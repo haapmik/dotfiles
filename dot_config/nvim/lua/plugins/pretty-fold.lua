@@ -33,7 +33,7 @@ function M.config()
           end
 
           if value ~= "" then
-            value = ":" .. value
+            value = "!!" .. value
           end
 
           return value

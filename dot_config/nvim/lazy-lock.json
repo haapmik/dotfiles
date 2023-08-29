@@ -12,6 +12,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "efmls-configs-nvim": { "branch": "main", "commit": "e244c307f520dc70627523759386d387c73803b8" },
   "fold-preview.nvim": { "branch": "main", "commit": "b7920cb0aba2b48a6b679bff45f98c3ebc0f0b89" },
+  "foldsigns.nvim": { "branch": "main", "commit": "7a07a5c49f0fa4e50b063a75a0737851a2c2c59c" },
   "gitsigns.nvim": { "branch": "main", "commit": "d8590288417fef2430f85bc8b312fae8b1cf2c40" },
   "hover.nvim": { "branch": "main", "commit": "c366d1b0f9d6612d25681d3fea0f9ea46fa54f4d" },
   "kanagawa.nvim": { "branch": "master", "commit": "0a24e504a3a278849ad0aef31cd6dd24c73ca3db" },
