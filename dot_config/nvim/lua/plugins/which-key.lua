@@ -37,6 +37,10 @@ function M.config()
     ["<C-j>"] = { nvim_tmux_nav.NvimTmuxNavigateDown, "Window - Navigate down" },
     ["<C-k>"] = { nvim_tmux_nav.NvimTmuxNavigateUp, "Window - Navigate up" },
     ["<C-l>"] = { nvim_tmux_nav.NvimTmuxNavigateRight, "Window - Navigate right" },
+    ["<C-w>m"] = { "<cmd>WindowsMaximize<cr>", "Window - Maximize" },
+    ["<C-w>_"] = { "<cmd>WindowsMaximizeVertically<cr>", "Window - Maximize vertically" },
+    ["<C-w>|"] = { "<cmd>WindowsMaximizeHorizontally<cr>", "Window - Maximize horizontally" },
+    ["<C-w>="] = { "<cmd>WindowsEqualize<cr>", "Window - Equalize" },
   })
 
   -- With <leader>
