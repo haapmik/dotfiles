@@ -1,6 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
-  cmd = { "LspStart", "LspInfo" },
+  lazy = false,
   dependencies = {
     "folke/neodev.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -18,6 +18,10 @@ local function get_lsp_client_configs(lsp_client)
 
   -- Include autocompletion capabilities
   opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
+  opts.capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
 
   -- LSP client specific configuration for selected buffer
   opts.on_attach = function(client, bufnr)
