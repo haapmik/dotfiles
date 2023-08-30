@@ -15,11 +15,11 @@ vim.opt.autochdir = true
 -- Folding
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99 -- ufo provider needs a large value, can be decreased if required
-vim.opt.foldlevelstart = 1
+vim.opt.foldlevelstart = 2
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
---vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Blending
 vim.opt.pumblend = 5
