@@ -4,7 +4,6 @@ local M = {
   dependencies = {
     "kevinhwang91/promise-async",
   },
-  opts = {},
 }
 
 local virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
@@ -40,16 +39,17 @@ end
 function M.config()
   local ufo = require("ufo")
 
-  ufo.setup({
-    close_fold_kinds = { "imports", "comment" },
-    fold_virt_text_handler = virt_text_handler,
-  })
-
   vim.keymap.set("n", "zR", ufo.openAllFolds)
   vim.keymap.set("n", "zM", ufo.closeAllFolds)
   vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds)
   vim.keymap.set("n", "zm", ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+
+  ufo.setup({
+    fold_virt_text_handler = virt_text_handler,
+    provider_selector = function(bufnr, filetype)
+      return { "lsp", "indent" }
+    end,
+  })
 end
 
---return M
-return {}
+return M
