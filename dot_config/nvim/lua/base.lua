@@ -12,16 +12,31 @@ vim.opt.updatetime = 300
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.autochdir = true
 
+-- Matchpair
+-- fix slowdown issues with large files
+--vim.g.loaded_matchparen = 1 -- Disable built-in matchparen
+vim.g.matchparen_timeout = 20 -- ms
+vim.g.matchparen_insert_timeout = 20 -- ms
+
 -- Folding
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "auto"
 vim.opt.foldlevel = 99 -- ufo provider needs a large value, can be decreased if required
 vim.opt.foldlevelstart = 2
+vim.opt.foldminlines = 2
+vim.opt.foldmethod = "indent"
+vim.opt.foldopen:append("insert")
 vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Blending
 vim.opt.pumblend = 5
 vim.opt.winblend = 5
+
+-- Window
+local winwidth = 10
+vim.opt.winwidth = winwidth
+vim.opt.winminwidth = winwidth
+vim.opt.equalalways = false
 
 -- Line wrapping
 vim.opt.linebreak = true -- line break between words

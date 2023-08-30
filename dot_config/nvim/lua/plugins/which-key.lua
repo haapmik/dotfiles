@@ -3,14 +3,14 @@ local M = {
   event = "VeryLazy",
   dependencies = {
     "lewis6991/hover.nvim",
-    "nvim-neotest/neotest",
+    --    "nvim-neotest/neotest",
     "nvim-tmux-navigation",
   },
 }
 
 function M.config()
   local wk = require("which-key")
-  local neotest = require("neotest")
+  --  local neotest = require("neotest")
   local hover = require("hover")
 
   wk.setup({})
@@ -77,63 +77,63 @@ function M.config()
         "Code action",
       },
     },
-    t = {
-      name = "Test",
-      r = {
-        function()
-          neotest.run.run()
-        end,
-        "Run nearest test",
-      },
-      R = {
-        function()
-          neotest.run.run(vim.fn.expand("%"))
-        end,
-        "Run the current file",
-      },
-      t = {
-        function()
-          neotest.run.stop()
-        end,
-        "Stop nearest test",
-      },
-      T = {
-        function()
-          neotest.run.stop(vim.fn.expand("%"))
-        end,
-        "Stop the current file",
-      },
-      O = {
-        function()
-          neotest.output_panel.toggle()
-        end,
-        "Toggle output panel",
-      },
-      o = {
-        function()
-          neotest.output({ short = true })
-        end,
-        "Open output display",
-      },
-      w = {
-        function()
-          neotest.watch.toggle()
-        end,
-        "Toggle watch to nearest tets",
-      },
-      W = {
-        function()
-          neotest.watch.toggle(vim.fn.expand("%"))
-        end,
-        "Toggle watch to the current file",
-      },
-      s = {
-        function()
-          neotest.summary.toggle()
-        end,
-        "Toggle summary",
-      },
-    },
+    --    t = {
+    --      name = "Test",
+    --      r = {
+    --        function()
+    --          neotest.run.run()
+    --        end,
+    --        "Run nearest test",
+    --      },
+    --      R = {
+    --        function()
+    --          neotest.run.run(vim.fn.expand("%"))
+    --        end,
+    --        "Run the current file",
+    --      },
+    --      t = {
+    --        function()
+    --          neotest.run.stop()
+    --        end,
+    --        "Stop nearest test",
+    --      },
+    --      T = {
+    --        function()
+    --          neotest.run.stop(vim.fn.expand("%"))
+    --        end,
+    --        "Stop the current file",
+    --      },
+    --      O = {
+    --        function()
+    --          neotest.output_panel.toggle()
+    --        end,
+    --        "Toggle output panel",
+    --      },
+    --      o = {
+    --        function()
+    --          neotest.output({ short = true })
+    --        end,
+    --        "Open output display",
+    --      },
+    --      w = {
+    --        function()
+    --          neotest.watch.toggle()
+    --        end,
+    --        "Toggle watch to nearest tets",
+    --      },
+    --      W = {
+    --        function()
+    --          neotest.watch.toggle(vim.fn.expand("%"))
+    --        end,
+    --        "Toggle watch to the current file",
+    --      },
+    --      s = {
+    --        function()
+    --          neotest.summary.toggle()
+    --        end,
+    --        "Toggle summary",
+    --      },
+    --    },
     f = {
       name = "File",
       f = { "<cmd>Telescope find_files<cr>", "Find file" },

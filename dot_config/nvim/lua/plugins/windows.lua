@@ -9,6 +9,13 @@ local M = {
 
 function M.config()
   require("windows").setup({
+    autowidth = {
+      enable = true,
+      winwidth = 0.7,
+      filetype = {
+        help = 2,
+      },
+    },
     animation = {
       enable = true,
       duration = 50,
