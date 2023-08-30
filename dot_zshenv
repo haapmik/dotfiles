@@ -46,5 +46,5 @@ export PATH="${PATH}:/snap/bin"
 
 # Add WSL paths
 export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"
-#export PATH="${PATH}:/mnt/c/Windows/System32"
+export PATH="${PATH}:/mnt/c/Windows/System32/copy.exe"
 #export PATH="${PATH}:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
