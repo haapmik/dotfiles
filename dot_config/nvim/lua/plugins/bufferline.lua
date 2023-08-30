@@ -29,8 +29,18 @@ function M.config()
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = false,
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local icon = level:match("error") and "E" or "W"
-        return icon .. "!"
+        local icon = ""
+
+        if level:match("error") then
+          icon = "E"
+        elseif level:match("warn") then
+          icon = "W"
+        end
+
+        if icon ~= "" then
+          return icon .. "!"
+        end
+        return ""
       end,
       groups = {
         options = {
