@@ -15,13 +15,12 @@ vim.opt.autochdir = true
 -- Matchpair
 -- fix slowdown issues with large files
 --vim.g.loaded_matchparen = 1 -- Disable built-in matchparen
-vim.g.matchparen_timeout = 20 -- ms
+vim.g.matchparen_timeout = 20        -- ms
 vim.g.matchparen_insert_timeout = 20 -- ms
 
 -- Folding
 vim.opt.foldcolumn = "1"
-vim.opt.foldlevel = 99 -- ufo provider needs a large value, can be decreased if required
-vim.opt.foldlevelstart = 99
+vim.opt.foldlevel = 99
 vim.opt.foldminlines = 2
 vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
