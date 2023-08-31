@@ -24,6 +24,17 @@ vim.opt.foldminlines = 2
 vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
+vim.cmd([[
+set viewoptions-=options
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWritePre *.* mkview
+  autocmd BufWritePost *.* silent loadview
+  autocmd BufWinEnter *.* silent loadview
+augroup END
+]])
+
 -- Blending
 vim.opt.pumblend = 5
 vim.opt.winblend = 5

@@ -75,6 +75,13 @@ function M.config()
         hidden = true,
         respect_gitignore = false,
       },
+      repo = {
+        list = {
+          search_dirs = {
+            "~/git-projects",
+          },
+        },
+      },
       ["ui-select"] = {
         require("telescope.themes").get_ivy(),
       },
@@ -87,7 +94,6 @@ function M.config()
   telescope.load_extension("env")
   telescope.load_extension("repo")
   telescope.load_extension("recent_files")
-  telescope.load_extension("persisted")
 end
 
 return M

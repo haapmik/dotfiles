@@ -28,6 +28,11 @@ local function get_config_typescript()
   return { rome, eslintd, prettierd }
 end
 
+local function get_config_markdown()
+  local prettierd = require("efmls-configs.formatters.prettier_d")
+  return { prettierd }
+end
+
 local function get_config_rust()
   local rustfmt = require("efmls-configs.formatters.rustfmt")
 
@@ -67,6 +72,7 @@ local function create_config()
     rust = get_config_rust(),
     typescript = get_config_typescript(),
     typescriptreact = get_config_typescript(),
+    markdown = get_config_markdown(),
   }
 
   opts.init_options = {
