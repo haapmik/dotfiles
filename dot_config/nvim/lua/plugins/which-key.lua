@@ -134,6 +134,12 @@ function M.config()
     --        "Toggle summary",
     --      },
     --    },
+    s = {
+      name = "Session",
+      s = { "<cmd>SessionSave<cr>", "Save session" },
+      l = { "<cmd>SessionLoad<cr>", "Load session" },
+      D = { "<cmd>SessionDelete<cr>", "Delete session" },
+    },
     f = {
       name = "File",
       f = { "<cmd>Telescope find_files<cr>", "Find file" },

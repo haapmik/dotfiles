@@ -87,6 +87,7 @@ function M.config()
   telescope.load_extension("env")
   telescope.load_extension("repo")
   telescope.load_extension("recent_files")
+  telescope.load_extension("persisted")
 end
 
 return M
