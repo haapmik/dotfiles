@@ -1,8 +1,9 @@
 -- Leader key mapping must be done before lazy
-vim.g.mapleader = 'å'
+vim.g.mapleader = "å"
 
 -- Load base configs
 require("base")
+require("autocmd")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -22,5 +23,5 @@ vim.loader.enable()
 
 -- Load plugins
 require("lazy").setup("plugins", {
-	defaults = { lazy = true },
+  defaults = { lazy = true },
 })

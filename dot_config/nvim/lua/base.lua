@@ -18,22 +18,14 @@ vim.g.matchparen_timeout = 20        -- ms
 vim.g.matchparen_insert_timeout = 20 -- ms
 
 -- Folding
+vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 vim.opt.foldminlines = 2
-vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
-vim.cmd([[
-set viewoptions-=options
-augroup AutoSaveFolds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWritePre *.* mkview
-  autocmd BufWritePost *.* silent loadview
-  autocmd BufWinEnter *.* silent loadview
-augroup END
-]])
 
 -- Blending
 vim.opt.pumblend = 5
@@ -51,11 +43,12 @@ vim.opt.showbreak = "+++"
 
 -- Indentation
 vim.opt.autoindent = true
-vim.opt.expandtab = true
+vim.opt.breakindent = true
 vim.opt.smartindent = true
+vim.opt.expandtab = true
 vim.opt.smarttab = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
 -- Setup directories
 local cache_dir = vim.env.HOME .. "/.cache/nvim"

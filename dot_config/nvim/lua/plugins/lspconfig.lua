@@ -13,10 +13,10 @@ local function create_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   -- for nvim-ufo
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
+  --capabilities.textDocument.foldingRange = {
+  --  dynamicRegistration = false,
+  --  lineFoldingOnly = true,
+  --}
 
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 

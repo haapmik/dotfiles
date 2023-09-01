@@ -16,9 +16,9 @@ function M.config()
 
   ufo.setup({
     provider_selector = function(bufnr, filetype)
-      return { "lsp", "indent" }
+      return { "treesitter", "indent" }
     end,
   })
 end
 
-return M
+return {}
