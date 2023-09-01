@@ -4,14 +4,14 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Persistent Folds
 -- based on https://github.com/NickP-real/.dotfile/tree/main
 local save_fold = augroup("Persistent Folds", { clear = true })
-autocmd({ "BufWinLeave", "BufWritePre" }, {
+autocmd({ "BufWritePre" }, {
   pattern = "*.*",
   callback = function()
     vim.cmd.mkview()
   end,
   group = save_fold,
 })
-autocmd({ "BufWinEnter", "BufWritePost" }, {
+autocmd({ "BufWritePost" }, {
   pattern = "*.*",
   callback = function()
     vim.cmd.loadview({ mods = { emsg_silent = true } })
