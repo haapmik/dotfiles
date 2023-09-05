@@ -17,16 +17,6 @@ vim.opt.autochdir = true
 vim.g.matchparen_timeout = 20        -- ms
 vim.g.matchparen_insert_timeout = 20 -- ms
 
--- Folding
-vim.opt.foldenable = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldcolumn = "1"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldminlines = 2
-vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
 -- Blending
 vim.opt.pumblend = 5
 vim.opt.winblend = 5

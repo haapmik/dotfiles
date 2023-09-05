@@ -9,6 +9,10 @@ local M = {
 
 function M.config()
   require("windows").setup({
+    ignore = {
+      buftype = { "quickfix" },
+      filetype = { "Trouble", "Outline" },
+    },
     autowidth = {
       enable = true,
       winwidth = 0.7,
