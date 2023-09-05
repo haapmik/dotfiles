@@ -21,8 +21,8 @@ local function configure_folding()
 
   set_folding_method("treesitter")
 
-  vim.opt.foldlevel = 99
-  vim.opt.foldlevelstart = 99
+  vim.opt.foldlevel = 2
+  vim.opt.foldlevelstart = 2
   vim.opt.foldminlines = 2
   vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end
@@ -58,6 +58,16 @@ local function enable_better_fold_search()
       vim.opt.foldenable = true
     end
   end, namespace_name)
+end
+
+local function reload_treesitter()
+  -- Reload treesitter to fix possible highlighting issues
+  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/78
+  vim.cmd("edit | TSBufEnable highlight")
+
+  -- Treesitter folding is experimental and sometimes breaks.
+  -- This will automatically reload folds for the current buffer.
+  vim.cmd.normal("zx")
 end
 
 --- Enables persisted folds across sessions.
@@ -96,7 +106,7 @@ local function enable_persisted_folds()
   local augroup_name = create_augroup("FoldsPresisted", { clear = true })
 
   -- Saving
-  create_autocmd({ "BufWinLeave", "BufWritePre" }, {
+  create_autocmd({ "BufWinLeave" }, {
     group = augroup_name,
     pattern = "?*",
     callback = function()
@@ -118,13 +128,20 @@ local function enable_persisted_folds()
 
   -- Fix Treesitter folds disappearing after save
   if treesitter_folds_enabled then
+    create_autocmd({ "BufWritePre" }, {
+      group = augroup_name,
+      pattern = "?*",
+      callback = function()
+        vim.cmd.mkview()
+      end,
+    })
+
     create_autocmd({ "BufWritePost" }, {
       group = augroup_name,
       pattern = "?*",
       callback = function()
-        vim.cmd("edit | TSBufEnable highlight")             -- reload treesitter highlight
-        vim.cmd.normal("zx")                                -- update folds
-        vim.cmd.loadview({ mods = { emsg_silent = true } }) -- reload view
+        reload_treesitter()
+        vim.cmd.loadview({ mods = { emsg_silent = true } })
       end,
     })
   end
