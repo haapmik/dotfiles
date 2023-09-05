@@ -74,19 +74,19 @@ local function enable_persisted_folds()
     buftype = nil,
   }
 
-  -- skip ignored filetypes
+  -- Skip ignored filetypes
   if ignore.filetype[vim.bo.filetype] ~= nil then
     return
   end
 
-  -- skip ignored buftype or all buftypes if undefined
+  -- Skip ignored buftype or all buftypes if undefined
   if ignore.buftype == nil and vim.bo.buftype ~= "" then
     return
   elseif ignore.buftype ~= nil and ignore.buftype[vim.bo.buftype] ~= nil then
     return
   end
 
-  -- skip unmodifiable files
+  -- Skip unmodifiable files
   if not vim.bo.modifiable then
     return
   end
@@ -100,7 +100,7 @@ local function enable_persisted_folds()
     group = augroup_name,
     pattern = "?*",
     callback = function()
-      vim.cmd.mkview(1)
+      vim.cmd.mkview()
     end,
   })
 
@@ -109,20 +109,22 @@ local function enable_persisted_folds()
     group = augroup_name,
     pattern = "?*",
     callback = function()
-      vim.cmd.loadview(1)
+      vim.cmd.loadview({ mods = { emsg_silent = true } })
     end,
   })
 
-  -- Fix Treesitter folds disappearing after save
   local treesitter_folds_enabled = string.match(vim.opt.foldexpr:get(), "treesitter")
       and vim.opt.foldmethod:get() == "expr"
+
+  -- Fix Treesitter folds disappearing after save
   if treesitter_folds_enabled then
     create_autocmd({ "BufWritePost" }, {
       group = augroup_name,
       pattern = "?*",
       callback = function()
-        vim.cmd.normal("zx")
-        vim.cmd.loadview(1)
+        vim.cmd("edit | TSBufEnable highlight")             -- reload treesitter highlight
+        vim.cmd.normal("zx")                                -- update folds
+        vim.cmd.loadview({ mods = { emsg_silent = true } }) -- reload view
       end,
     })
   end
