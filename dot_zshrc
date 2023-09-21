@@ -82,9 +82,22 @@ zi wait lucid for \
      zsh-users/zsh-autosuggestions
 zi wait pack atload=+"zicompinit; zicdreplay" for system-completions
 
+zi is-snippet wait lucid for \
+  if'[[ -d ~/.ssh ]]' \
+    OMZP::ssh-agent
+
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zstyle :omz:plugins:ssh-agent lifetime 4h
+zstyle :omz:plugins:ssh-agent identities id_ed25519
+zstyle :omz:plugins:ssh-agent lazy yes
+zstyle :omz:plugins:ssh-agent quiet yes
+
 ZSH_SYSTEM_CLIPBOARD_METHOD=tmux # Using tmux because wsl method is too slow
 ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#727169"
 
 zicompinit # <- https://wiki.zshell.dev/docs/guides/commands
+
+# bun completions
+[ -s "/home/mww1720/.local/share/bun/_bun" ] && source "/home/mww1720/.local/share/bun/_bun"

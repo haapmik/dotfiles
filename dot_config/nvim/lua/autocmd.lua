@@ -16,4 +16,40 @@ local function autocmd_create_dir()
   })
 end
 
+local function autocmd_python()
+  autocmd({ "FileType" }, {
+    pattern = "python",
+    callback = function(opts)
+      vim.opt.tabstop = 4
+      vim.opt.softtabstop = 4
+      vim.opt.shiftwidth = 4
+      vim.opt.textwidth = 79
+      vim.opt.expandtab = true
+      vim.opt.autoindent = true
+    end,
+  })
+end
+
+local function autocmd_typescript()
+  autocmd({ "FileType" }, {
+    pattern = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+    callback = function(opts)
+      vim.opt.autoindent = true
+      vim.opt.breakindent = true
+      vim.opt.smartindent = true
+      vim.opt.expandtab = true
+      vim.opt.smarttab = true
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
+    end,
+  })
+end
+
 autocmd_create_dir()
+autocmd_python()
+autocmd_typescript()

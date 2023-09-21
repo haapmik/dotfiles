@@ -19,12 +19,7 @@ local M = {
 function M.config()
   local telescope = require("telescope")
   local theme = "ivy"
-  local file_ignore_patterns = {
-    "%.git",
-    "node_modules",
-    "build",
-    "dist",
-  }
+  local file_ignore_patterns = {}
 
   telescope.setup({
     defaults = {
@@ -67,6 +62,7 @@ function M.config()
         override_generic_sorter = true,
         override_file_sorter = true,
         case_mode = "smart_case",
+        respect_gitignore = false,
       },
       file_browser = {
         theme = theme,
