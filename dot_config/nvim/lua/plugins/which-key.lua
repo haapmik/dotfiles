@@ -68,7 +68,8 @@ function M.config()
       },
       q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
       d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-      t = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble list" },
+      t = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble document list" },
+      T = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble workspace list" },
       s = { "<cmd>SymbolsOutline<cr>", "Symbol list" },
       a = {
         function()

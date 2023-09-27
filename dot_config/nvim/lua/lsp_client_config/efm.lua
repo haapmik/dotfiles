@@ -28,6 +28,13 @@ local function get_config_typescript()
   return { rome, eslintd, prettierd }
 end
 
+local function get_config_sh()
+  local shellharden = require("efmls-configs.formatters.shellharden")
+  local shellcheck = require("efmls-configs.linters.shellcheck")
+
+  return { shellcheck, shellharden }
+end
+
 local function get_config_markdown()
   local prettierd = require("efmls-configs.formatters.prettier_d")
   return { prettierd }
@@ -73,6 +80,8 @@ local function create_config()
     typescript = get_config_typescript(),
     typescriptreact = get_config_typescript(),
     markdown = get_config_markdown(),
+    sh = get_config_sh(),
+    bash = get_config_sh(),
   }
 
   opts.init_options = {

@@ -29,6 +29,10 @@ if [[ -f "${CARGO_HOME}/env" ]]; then
     . "${CARGO_HOME}/env"
 fi
 
+# bun
+export BUN_INSTALL="${XDG_DATA_HOME}/bun"
+export PATH="${PATH}:${BUN_INSTALL}/bin"
+
 # Go
 export GOPATH="${XDG_DATA_HOME}/go"
 export PATH="${PATH}:${GOPATH}/bin"
@@ -43,6 +47,9 @@ export PATH="${PATH}:${NPMPATH}/bin"
 
 # snapd binaries
 export PATH="${PATH}:/snap/bin"
+
+# jfrog
+export JFROG_CLI_HOME_DIR="${XDG_DATA_HOME}/jfrog"
 
 # Add WSL paths
 export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"
