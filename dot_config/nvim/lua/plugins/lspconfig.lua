@@ -6,47 +6,37 @@ local M = {
     "williamboman/mason-lspconfig.nvim",
     "creativenull/efmls-configs-nvim",
     "b0o/SchemaStore.nvim",
+    "lukas-reineke/lsp-format.nvim",
+    "lvimuser/lsp-inlayhints.nvim",
+    "hrsh7th/cmp-nvim-lsp",
   },
 }
 
-local function create_capabilities()
+local function create_client_capabilities()
+  -- Include default client capabilities
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  -- for nvim-ufo
-  --capabilities.textDocument.foldingRange = {
-  --  dynamicRegistration = false,
-  --  lineFoldingOnly = true,
-  --}
-
+  -- Add cmp-nvim capabilities for code completion
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+  -- Add nvim-ufo capabilities
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+  capabilities.textDocument.rangeFormatting = {}
 
   return capabilities
 end
 
 local function get_lsp_client_configs(lsp_client)
   local opts = {}
-
-  -- Include capabilities
-  opts.capabilities = create_capabilities()
-
-  -- Create augroup for LSP clients
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-  -- LSP client specific configuration for selected buffer
+  opts.capabilities = create_client_capabilities()
   opts.on_attach = function(client, bufnr)
-    -- Formatting
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({
-            bufnr = bufnr,
-            async = false,
-          })
-        end,
-      })
+    require("lsp-format").on_attach(client, bufnr)
+
+    if client.supports_method("textDocument/inlayHint") then
+      require("lsp-inlayhints").on_attach(client, bufnr)
     end
   end
 

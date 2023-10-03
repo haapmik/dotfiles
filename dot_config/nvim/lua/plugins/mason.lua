@@ -2,10 +2,7 @@ local M = {
   "williamboman/mason.nvim",
   lazy = false,
   build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-}
-
-function M.config()
-  require("mason").setup({
+  opts = {
     ui = {
       icons = {
         package_installed = "✓",
@@ -13,7 +10,7 @@ function M.config()
         package_uninstalled = "✗",
       },
     },
-  })
-end
+  },
+}
 
 return M

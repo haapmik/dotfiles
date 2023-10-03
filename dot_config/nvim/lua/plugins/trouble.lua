@@ -1,10 +1,7 @@
 local M = {
   "folke/trouble.nvim",
   event = { "BufReadPre", "BufNewFile" },
-}
-
-function M.opts()
-  return {
+  opts = {
     icons = false,
     group = true, -- group by file
     padding = false,
@@ -12,7 +9,7 @@ function M.opts()
     auto_open = false,
     auto_close = false,
     use_diagnostic_signs = true,
-  }
-end
+  },
+}
 
 return M

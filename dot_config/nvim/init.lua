@@ -3,7 +3,7 @@ vim.g.mapleader = "å"
 
 -- Load base configs
 require("base")
-require("folding")
+--require("folding")
 require("autocmd")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

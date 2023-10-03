@@ -5,10 +5,7 @@ local M = {
     "anuvyklack/middleclass",
     "anuvyklack/animation.nvim",
   },
-}
-
-function M.config()
-  require("windows").setup({
+  opts = {
     ignore = {
       buftype = { "quickfix" },
       filetype = { "Trouble", "Outline" },
@@ -32,7 +29,7 @@ function M.config()
         end
       end,
     },
-  })
-end
+  },
+}
 
 return M

@@ -48,8 +48,8 @@ function M.config()
         },
         items = {
           {
-            name = "Tests", -- Mandatory
-            priority = 2, -- Relation to other groups
+            name = "Tests",         -- Mandatory
+            priority = 2,           -- Relation to other groups
             matcher = function(buf) -- Mandatory
               return buf.path:match(".spec.")
             end,
@@ -62,4 +62,4 @@ function M.config()
   })
 end
 
-return M
+return {}

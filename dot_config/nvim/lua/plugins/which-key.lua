@@ -5,6 +5,7 @@ local M = {
     "lewis6991/hover.nvim",
     --    "nvim-neotest/neotest",
     "nvim-tmux-navigation",
+    "lvimuser/lsp-inlayhints.nvim",
   },
 }
 
@@ -12,6 +13,7 @@ function M.config()
   local wk = require("which-key")
   --  local neotest = require("neotest")
   local hover = require("hover")
+  local inlayhints = require("lsp-inlayhints")
 
   wk.setup({})
 
@@ -45,21 +47,16 @@ function M.config()
 
   -- With <leader>
   wk.register({
-    b = {
-      name = "Buffer",
-      p = { "<cmd>BufferLinePick<cr>", "Bufferline - pick" },
-      D = { "<cmd>BufferLinePickClose<cr>", "Bufferline - close" },
-    },
+    --b = {
+    --  name = "Buffer",
+    --  p = { "<cmd>BufferLinePick<cr>", "Bufferline - pick" },
+    --  D = { "<cmd>BufferLinePickClose<cr>", "Bufferline - close" },
+    --},
     c = {
       name = "Code",
       ["ä"] = { vim.diagnostic.goto_prev, "Diagnostics - previous" },
       ["ö"] = { vim.diagnostic.goto_next, "Diagnostics - next" },
-      f = {
-        function()
-          vim.lsp.buf.format({ async = false })
-        end,
-        "Format code",
-      },
+      f = { "<cmd>Format<cr>", "Format code" },
       r = {
         function()
           vim.lsp.buf.rename()
@@ -76,6 +73,12 @@ function M.config()
           vim.lsp.buf.code_action()
         end,
         "Code action",
+      },
+      H = {
+        function()
+          inlayhints.toggle()
+        end,
+        "Toggle inlay hints",
       },
     },
     --    t = {
