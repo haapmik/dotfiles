@@ -37,6 +37,7 @@ function M.config()
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
+          separator = { right = "" },
         },
         {
           "encoding",
@@ -86,7 +87,6 @@ function M.config()
       lualine_y = {},
       lualine_z = {},
     },
-    extensions = {},
   })
 end
 

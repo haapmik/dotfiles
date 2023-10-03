@@ -20,11 +20,11 @@ local function create_client_capabilities()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   -- Add nvim-ufo capabilities
+  capabilities.textDocument = capabilities.textDocument or {}
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
   }
-  capabilities.textDocument.rangeFormatting = {}
 
   return capabilities
 end

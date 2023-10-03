@@ -39,17 +39,17 @@ function M.config()
 
   vim.opt.foldenable = true
   vim.opt.foldcolumn = "1" -- '0' is not bad
-  vim.opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+  vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
   vim.opt.foldlevelstart = 99
   vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
+  -- We need to replace original fold related keymaps with ufo's
   vim.keymap.set("n", "zR", ufo.openAllFolds)
   vim.keymap.set("n", "zM", ufo.closeAllFolds)
   vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds)
   vim.keymap.set("n", "zm", ufo.closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
   ufo.setup({
-    --close_fold_kinds = { "region" },
     fold_virt_text_handler = fold_virt_text_provider,
   })
 end

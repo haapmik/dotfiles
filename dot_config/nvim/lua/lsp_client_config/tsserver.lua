@@ -1,11 +1,3 @@
-local function table_assign(table_a, table_b)
-  local merged = table_a
-  for key, value in pairs(table_b) do
-    merged[key] = value
-  end
-  return merged
-end
-
 -- @see https://github.com/typescript-language-server/typescript-language-server#initializationoptions
 local server_default_preferences = {
   allowIncompleteCompletions = true,
@@ -39,7 +31,7 @@ local inlay_hints = {
 local M = {
   init_options = {
     hostInfo = "neovim",
-    preferences = table_assign(server_default_preferences, {
+    preferences = vim.tbl_extend("force", server_default_preferences, {
       importModuleSpecifierEnding = "auto",
       includeCompletionsForModuleExports = true,
       includeCompletionsWithInsertText = true,
