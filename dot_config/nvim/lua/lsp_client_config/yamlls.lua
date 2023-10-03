@@ -1,5 +1,10 @@
 local M = {
   settings = {
+    redhat = {
+      telemetry = {
+        enabled = false,
+      },
+    },
     yaml = {
       schemaStore = {
         -- You must disable built-in schemaStore support if you want to use
@@ -8,7 +13,6 @@ local M = {
       },
       schemas = {
         require("schemastore").yaml.schemas(),
-        kubernetes = "globPattern",
       },
     },
   },
