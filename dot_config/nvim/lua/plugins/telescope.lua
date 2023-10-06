@@ -13,6 +13,7 @@ local M = {
     "LinArcX/telescope-env.nvim",
     "smartpde/telescope-recent-files",
     "cljoly/telescope-repo.nvim",
+    "someone-stole-my-name/yaml-companion.nvim",
   },
 }
 
@@ -90,6 +91,7 @@ function M.config()
   telescope.load_extension("env")
   telescope.load_extension("repo")
   telescope.load_extension("recent_files")
+  telescope.load_extension("yaml_schema")
 end
 
 return M

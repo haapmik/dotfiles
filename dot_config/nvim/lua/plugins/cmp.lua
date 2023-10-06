@@ -1,6 +1,6 @@
 local M = {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  event = "VeryLazy",
   dependencies = {
     "dmitmel/cmp-cmdline-history",
     "hrsh7th/cmp-buffer",
@@ -45,7 +45,7 @@ function M.config()
           vsnip = "[VSnippet]",
           path = "[Path]",
           look = "[Look]",
-          luasnip = "[Luasnip]",
+          luasnip = "[LuaSnip]",
           git = "[Git]",
           cmd = "[Cmd]",
           cmd_history = "[CmdHistory]",
@@ -99,6 +99,9 @@ function M.config()
 
   -- CMD specific comletion
   cmp.setup.cmdline(":", {
+    performance = {
+      max_view_entries = 15,
+    },
     sources = {
       { name = "path" },
       { name = "cmdline" },
@@ -107,6 +110,9 @@ function M.config()
     },
   })
   cmp.setup.cmdline("/", {
+    performance = {
+      max_view_entries = 15,
+    },
     sources = {
       { name = "buffer" },
       { name = "cmdline_history" },
