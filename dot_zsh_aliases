@@ -1,4 +1,10 @@
 # Avoid messing my flow when running commands in multiple environments
-alias vim=nvim
-alias podman=docker
+if command -v nvim &> /dev/null; then
+  alias vim=nvim
+fi
+
+if ! command -v podman &> /dev/null; then
+  alias podman=docker
+fi
+
 alias ls="ls --color"
