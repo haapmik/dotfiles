@@ -18,14 +18,14 @@ local function get_config_typescript()
   }
   eslintd.requireMarker = true
 
-  local rome = {
-    formatCommand = "npx rome format --colors off --stdin-file-path ${INPUT}",
+  local biome = {
+    formatCommand = "npx biome format --stdin-file-path '${INPUT}'",
     formatStdin = true,
-    rootMarkers = { "rome.json" },
+    rootMarkers = { "biome.json", "rome.json" },
     requireMarker = true,
   }
 
-  return { rome, eslintd, prettierd }
+  return { biome, eslintd, prettierd }
 end
 
 local function get_config_sh()

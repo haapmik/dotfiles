@@ -12,7 +12,6 @@ function M.config()
     ensure_installed = {
       "ansiblels",
       "bashls",
-      "biome",
       "clangd",
       "cssls",
       "docker_compose_language_service",

@@ -22,7 +22,6 @@ main() {
 
     ####
     # PLUGINS
-
     tmux set -g @mode_indicator_prefix_prompt " PREFIX "
     tmux set -g @mode_indicator_prefix_mode_style bg="$color_yellow,fg=$color_bg",bold
     tmux set -g @mode_indicator_copy_prompt "  COPY  "
@@ -32,7 +31,7 @@ main() {
     tmux set -g @mode_indicator_empty_prompt "  TMUX  "
     tmux set -g @mode_indicator_empty_mode_style bg="$color_blue,fg=$color_bg",bold
 
-    # tmux cpu
+    ## tmux cpu
     tmux set -g @cpu_percentage_format "CPU: %2.0f%%"
     tmux set -g @cpu_low_fg_color "#[fg=$color_green]"
     tmux set -g @cpu_medium_fg_color "#[fg=$color_yellow]"
@@ -49,14 +48,13 @@ main() {
     tmux set -g @ram_medium_thresh "30"
     tmux set -g @ram_high_thresh "80"
 
-    # tmux-pomodoro
+    ## tmux-pomodoro
     #tmux set -g @pomodoro_on " #[fg=$color_gray] "
     #tmux set -g @pomodoro_complete " #[fg=$color_green] "
     #tmux set -g @pomodoro_ask_break " #[fg=$color_gray] break?"
 
     ###
     # OPTIONS
-
     tmux set -g status on
     tmux set -g status-justify left
     tmux set -g status-position bottom
@@ -73,9 +71,8 @@ main() {
 
     ###
     # FORMAT
-
-    tmux set -g status-left "#{tmux_mode_indicator}#[bg=$color_bg] #S #[default]#[fg=$color_gray]#{pomodoro_status} "
-    tmux set -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} | %a %d-%b %Y %H:%M %Z"
+    tmux set -g status-left "#{tmux_mode_indicator}#[bg=$color_bg] #S #[bg=$color_cyan,fg=$color_bg]#{simple_git_status}#[default]#[fg=$color_gray]#{pomodoro_status} "
+    tmux set -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} "
     tmux setw -g window-status-format "#[fg=$color_gray]#I: #[noitalics]#W"
     tmux setw -g window-status-current-format "#[fg=$color_magenta]#I: #[fg=$color_buffer,noitalics,bold]#W"
 }

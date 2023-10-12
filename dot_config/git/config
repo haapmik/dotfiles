@@ -1,9 +1,7 @@
 [init]
-	templateDir = /home/haapmik/.local/share/git/templates
 	defaultBranch = main
 [user]
 	name = Mikko Haapanen
-	email = 26046991+haapmik@users.noreply.github.com
 [core]
 	editor = nvim
 [alias]
@@ -18,3 +16,7 @@
 	repo = town repo
 	ship = town ship
 	sync = town sync
+[includeIf "hasconfig:remote.*.url:*://git@git.verso.sonera.fi"]
+  path = ./config-verso
+[includeIf "hasconfig:remote.*.url:*:git@github.com"]
+  path = ./config-github
