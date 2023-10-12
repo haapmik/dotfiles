@@ -39,7 +39,9 @@ bindkey "^?" backward-delete-char # set backspace to work in all vim modes
 # End of lines configured by zsh-newuser-install
 
 # Aliases
-alias ls="ls --color"
+if [[ -f ${HOME}/.zsh_aliases ]]; then
+  source "${HOME}/.zsh_aliases"
+fi
 
 # Automatically run tmux if available
 if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then
@@ -82,13 +84,9 @@ zi wait lucid for \
      zsh-users/zsh-autosuggestions
 zi wait pack atload=+"zicompinit; zicdreplay" for system-completions
 
-zi is-snippet wait lucid for \
-  if'[[ -d ~/.ssh ]]' \
-    OMZP::ssh-agent
-
-zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zi snippet OMZP::ssh-agent
+zstyle :omz:plugins:ssh-agent agent-forwarding ye
 zstyle :omz:plugins:ssh-agent lifetime 4h
-zstyle :omz:plugins:ssh-agent identities id_ed25519
 zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:plugins:ssh-agent quiet yes
 
