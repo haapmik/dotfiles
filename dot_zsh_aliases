@@ -1,4 +1,4 @@
-# Avoid messing my flow running commands in multiple environments
+# Avoid messing my flow when running commands in multiple environments
 alias vim=nvim
 alias podman=docker
 alias ls="ls --color"
