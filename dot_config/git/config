@@ -16,7 +16,7 @@
 	repo = town repo
 	ship = town ship
 	sync = town sync
-[includeIf "hasconfig:remote.*.url:*://git@git.verso.sonera.fi"]
+[includeIf "hasconfig:remote.*.url:*://git@git.verso.sonera.fi:*"]
   path = ./config-verso
-[includeIf "hasconfig:remote.*.url:*:git@github.com"]
+[includeIf "hasconfig:remote.*.url:*:git@github.com:*"]
   path = ./config-github
