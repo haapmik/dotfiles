@@ -6,8 +6,8 @@ local M = {
     "williamboman/mason-lspconfig.nvim",
     "creativenull/efmls-configs-nvim",
     "b0o/SchemaStore.nvim",
-    "lukas-reineke/lsp-format.nvim",
     "lvimuser/lsp-inlayhints.nvim",
+    "lukas-reineke/lsp-format.nvim",
     "hrsh7th/cmp-nvim-lsp",
   },
 }
@@ -31,9 +31,16 @@ end
 
 local function get_lsp_client_configs(lsp_client)
   local opts = {}
+
+  -- Prepare autoformatter
+  local lsp_format = require("lsp-format")
+  lsp_format.setup({
+    sync = true, -- Required for :wq
+  })
+
   opts.capabilities = create_client_capabilities()
   opts.on_attach = function(client, bufnr)
-    require("lsp-format").on_attach(client, bufnr)
+    lsp_format.on_attach(client, bufnr)
 
     if client.supports_method("textDocument/inlayHint") then
       require("lsp-inlayhints").on_attach(client, bufnr)

@@ -11,4 +11,4 @@ function M.config()
   --vim.cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 end
 
-return M
+return {}

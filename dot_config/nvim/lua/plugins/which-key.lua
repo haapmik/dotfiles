@@ -54,9 +54,9 @@ function M.config()
     --},
     c = {
       name = "Code",
-      ["ä"] = { vim.diagnostic.goto_prev, "Diagnostics - previous" },
-      ["ö"] = { vim.diagnostic.goto_next, "Diagnostics - next" },
-      f = { "<cmd>Format<cr>", "Format code" },
+      ["ä"] = { function() vim.diagnostic.goto_prev() end, "Diagnostics - previous" },
+      ["ö"] = { function() vim.diagnostic.goto_next() end, "Diagnostics - next" },
+      f = { function() vim.lsp.buf.format() end, "Format code" },
       r = {
         function()
           vim.lsp.buf.rename()

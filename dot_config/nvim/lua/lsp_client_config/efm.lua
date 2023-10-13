@@ -19,7 +19,7 @@ local function get_config_typescript()
   eslintd.requireMarker = true
 
   local biome = {
-    formatCommand = "npx biome format --stdin-file-path '${INPUT}'",
+    formatCommand = "npx biome format --write --stdin-file-path '${INPUT}'",
     formatStdin = true,
     rootMarkers = { "biome.json", "rome.json" },
     requireMarker = true,
