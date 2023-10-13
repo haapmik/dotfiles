@@ -7,8 +7,6 @@ main() {
     ####
     # COLOR PALETTE
     # Based on Snazzy: https://github.com/sindresorhus/hyper-snazzy
-    local color_fg="#eff0eb"
-    local color_bg="#282a36"
     local color_green="#5af78e"
     local color_yellow="#f3f99d"
     local color_red="#ff5c57"
@@ -16,8 +14,14 @@ main() {
     local color_cyan="#9aedfe"
     local color_magenta="#ff6ac1"
     local color_gray="#5c6370"
+    local color_white="#f1f1f0"
+
+    local color_fg="#eff0eb"
+    local color_bg="#282a36"
     local color_buffer="#939aa3"
     local color_border="#222430"
+    local color_cursor="#97979b"
+    local color_selection="#97979b"
 
 
     ####
@@ -62,7 +66,7 @@ main() {
     tmux set -g status-right-length 100
     tmux set -g status-style "bg=$color_bg,fg=$color_fg"
 
-    tmux set -g pane-active-border fg="$color_green"
+    tmux set -g pane-active-border fg="$color_selection"
     tmux set -g pane-border-style fg="$color_border"
 
     tmux set -g message-style "bg=$color_blue,fg=$color_bg"
