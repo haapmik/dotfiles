@@ -34,9 +34,14 @@ local function get_lsp_client_configs(lsp_client)
 
   -- Prepare autoformatter
   local lsp_format = require("lsp-format")
-  lsp_format.setup({
-    sync = true, -- Required for :wq
-  })
+  local lsp_format_config = {}
+  local completions = vim.fn.getcompletion("", "filetype")
+  if completions ~= nil then
+    for _, v in pairs(completions) do
+      lsp_format_config[v] = { sync = true } -- Asynchronous causes problems with multiple buffers
+    end
+  end
+  lsp_format.setup(lsp_format_config)
 
   opts.capabilities = create_client_capabilities()
   opts.on_attach = function(client, bufnr)

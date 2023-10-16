@@ -21,15 +21,15 @@ function M.config()
       lualine_b = { "branch", "diff" },
       lualine_c = {
         {
-          "filetype",
-          icon_only = false,
-          separator = { right = "" },
-        },
-        {
           "filename",
           file_status = true,
-          path = 0,
-          padding = { left = 0 },
+          newfile_status = true,
+          path = 4,
+          symbols = {
+            unnamed = "[no name]",
+            newfile = "[new]",
+            readonly = "[!]",
+          },
           separator = { right = "" },
         },
       },
@@ -40,12 +40,16 @@ function M.config()
           separator = { right = "" },
         },
         {
+          "filetype",
+          icon_only = false,
+          separator = { right = "" },
+        },
+        {
           "encoding",
           separator = { right = "" },
         },
         {
           "fileformat",
-          padding = { left = 0, right = 1 },
         },
         {
           require("lazy.status").updates,
@@ -74,13 +78,15 @@ function M.config()
         {
           "filename",
           file_status = true,
-          path = 1,
+          newfile_status = true,
+          path = 3,
+          shorting_target = 80,
+          symbols = {
+            unnamed = "[no name]",
+            newfile = "[new]",
+            readonly = "[!]",
+          },
           separator = { right = "" },
-        },
-        {
-          "filetype",
-          icon_only = true,
-          padding = { left = 0 },
         },
       },
       lualine_x = { "location" },
