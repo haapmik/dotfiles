@@ -1,6 +1,6 @@
 local M = {
   "towolf/vim-helm",
-  lazy = false,
+  ft = "helm",
 }
 
 return M

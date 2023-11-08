@@ -28,6 +28,22 @@ local function get_config_typescript()
   return { biome, eslintd, prettierd }
 end
 
+local function get_config_helm()
+  local helm_lint = {
+    prefix = "helm",
+    lintCommand = "helm lint",
+    lintWorkspace = true,
+    lintStdin = false,
+    lintFormats = {
+      "[%tNFO] %f: %m",
+      "[%tRROR] %f: %m line %l",
+    },
+    rootMarkers = { "Chart.yaml" },
+    requireMarker = true,
+  }
+  return { helm_lint }
+end
+
 local function get_config_sh()
   local shellharden = require("efmls-configs.formatters.shellharden")
   local shellcheck = require("efmls-configs.linters.shellcheck")
@@ -82,6 +98,7 @@ local function create_config()
     markdown = get_config_markdown(),
     sh = get_config_sh(),
     bash = get_config_sh(),
+    helm = get_config_helm(),
   }
 
   opts.init_options = {

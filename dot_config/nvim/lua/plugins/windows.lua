@@ -12,7 +12,7 @@ local M = {
     },
     autowidth = {
       enable = true,
-      winwidth = 0.7,
+      winwidth = 0.65,
       filetype = {
         help = 2,
       },

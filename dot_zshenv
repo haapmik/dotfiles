@@ -51,6 +51,9 @@ export PATH="${PATH}:/snap/bin"
 # jfrog
 export JFROG_CLI_HOME_DIR="${XDG_DATA_HOME}/jfrog"
 
+# kubectl krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # Add WSL paths
 export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"
 export PATH="${PATH}:/mnt/c/Windows/System32/copy.exe"
