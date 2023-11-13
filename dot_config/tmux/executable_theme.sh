@@ -76,7 +76,7 @@ main() {
     ###
     # FORMAT
     tmux set -g status-left "#{tmux_mode_indicator}#[bg=$color_bg] #S #[bg=$color_cyan,fg=$color_bg]#{simple_git_status}#[default]#[fg=$color_gray]#{pomodoro_status} "
-    tmux set -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} "
+    tmux set -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} | Session interval: #{continuum_status} "
     tmux setw -g window-status-format "#[fg=$color_gray]#I: #[noitalics]#W"
     tmux setw -g window-status-current-format "#[fg=$color_magenta]#I: #[fg=$color_buffer,noitalics,bold]#W"
 }

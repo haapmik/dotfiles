@@ -56,6 +56,8 @@ function M.config()
       name = "Code",
       ["ä"] = { function() vim.diagnostic.goto_prev() end, "Diagnostics - previous" },
       ["ö"] = { function() vim.diagnostic.goto_next() end, "Diagnostics - next" },
+      ca = { "<cmd>ColorizerAttachToBuffer<cr>", "Colour highlighter - attach"},
+      ct = { "<cmd>ColorizerToggle<cr>", "Colour highlighter - toggle"},
       f = { function() vim.lsp.buf.format() end, "Format code" },
       r = {
         function()
