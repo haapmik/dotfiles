@@ -21,10 +21,14 @@ function M.config()
       "vimdoc",
     },
     auto_install = true,
+    incremental_selection = {
+      enable = true,
+    },
     highlight = {
       enable = true,
     },
     indent = {
+      -- this is an experimental feature
       enable = true,
     },
   })

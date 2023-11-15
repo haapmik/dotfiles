@@ -13,6 +13,14 @@ export XDG_DATA_HOME="${HOME}/.local/share" # User's /usr/share
 export XDG_STATE_HOME="${HOME}/.local/state"
 export XDG_CACHE_HOME="${HOME}/.cache"      # User's /var/cache
 
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
+
+if command -v thefuck &> /dev/null; then
+  export THEFUCK_HISTORY_LIMIT='2000'
+  export THEFUCK_REQUIRE_CONFIRMATION='false'
+  export THEFUCK_WAIT_COMMAND=2
+fi
+
 # Locally installed binaries
 export PATH="${PATH}:${HOME}/.local/bin"
 

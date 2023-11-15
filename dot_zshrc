@@ -31,18 +31,18 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt EXTENDED_HISTORY
-setopt COMPLETE_IN_WORD
-setopt ALWAYS_TO_END
-setopt PROMPT_SUBST
-setopt AUTO_MENU
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_all_dups   # remove older duplicate entries from the history
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_reduce_blanks     # remove superfluous blanks from history items
+setopt hist_save_no_dups      # do not write a duplicate event to the history file
+setopt inc_append_history     # allow multiple terminal sessions to append to one history
+setopt inc_append_history     # write to the history file immediately, not when the shell exits.
+setopt share_history          # share command history data
 
-setopt beep extendedglob nomatch notify correct
+setopt beep extendedglob nomatch notify
 unsetopt autocd
 
 # Use vim like key bindings
@@ -58,7 +58,7 @@ fi
 
 # Automatically run tmux if available
 if [[ -f /usr/bin/tmux ]] && [[ "${TMUX}" = "" ]]; then
-    tmux
+    tmux new-session -t default
 fi
 
 # Automatically install zsh zi if missing
@@ -90,12 +90,15 @@ zi light-mode for @sindresorhus/pure
 zi wait lucid for \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
      z-shell/F-Sy-H \
+     z-shell/H-S-MW \
      kutsan/zsh-system-clipboard \
   blockf \
      zsh-users/zsh-completions \
   atload"!_zsh_autosuggest_start" \
-     zsh-users/zsh-autosuggestions
+    zsh-users/zsh-autosuggestions
 zi wait pack atload=+"zicompinit; zicdreplay" for system-completions
+
+zi snippet OMZP::thefuck
 
 zi snippet OMZP::ssh-agent
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
@@ -105,10 +108,22 @@ zstyle :omz:plugins:ssh-agent quiet yes
 
 ZSH_SYSTEM_CLIPBOARD_METHOD=tmux # Using tmux because wsl method is too slow
 ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 zicompinit # <- https://wiki.zshell.dev/docs/guides/commands
 
+# Refresh prompt
+schedprompt() {
+  zle && zle reset-prompt
+  sched +1 schedprompt
+}
+
+zmodload -i zsh/sched
+schedprompt
+
 # bun completions
 [ -s "/home/mww1720/.local/share/bun/_bun" ] && source "/home/mww1720/.local/share/bun/_bun"
+
+eval $(thefuck --alias prkl)
+eval $(thefuck --alias fuck)

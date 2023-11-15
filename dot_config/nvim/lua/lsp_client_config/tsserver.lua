@@ -41,7 +41,7 @@ local M = {
   },
   settings = {
     completions = {
-      completeFunctionCalls = true,
+      completeFunctionCalls = false,
     },
     typesscript = {
       inlayHints = inlay_hints,

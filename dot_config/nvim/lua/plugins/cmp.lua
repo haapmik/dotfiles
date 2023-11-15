@@ -81,19 +81,19 @@ function M.config()
     },
     -- Default snippet sources
     sources = {
-      { name = "nvim_lsp" },
-      { name = "nvim_lsp_signature_help" },
-      { name = "luasnip" },
-      { name = "path" },
-      { name = "git" },
-      { name = "nvim_lua" },
+      { name = "nvim_lsp", priority = 100 },
+      { name = "nvim_lsp_signature_help", priority = 90 },
+      { name = "luasnip", priority = 80 },
+      { name = "path", priority = 80 },
+      { name = "git", priority = 50 },
+      { name = "nvim_lua", priority = 90 },
       {
         name = "look",
         max_item_count = 10,
         keyword_length = 3,
         option = { convert_case = true, loud = true },
       },
-      { name = "buffer" },
+      { name = "buffer", priority = 80 },
     },
   })
 
