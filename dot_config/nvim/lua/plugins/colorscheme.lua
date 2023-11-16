@@ -13,12 +13,31 @@ local everblush = {
   end,
 }
 
+local solarized_osaka = {
+  "craftzdog/solarized-osaka.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("solarized-osaka").setup({
+      transparent = true,
+      terminal_colors = true,
+      styles = {
+        sidebars = "dark",
+        floats = "dark",
+      },
+      sidebars = { "Outline", "Trouble" },
+      dim_inactive = true,
+    })
+    vim.cmd("colorscheme solarized-osaka")
+  end,
+}
+
 local kanagawa = {
   "rebelot/kanagawa.nvim",
   lazy = false,
   priority = 1000,
   build = ":KanagawaCompile",
-  opts = function()
+  config = function()
     require("kanagawa").setup({
       compile = true,
       undercurl = true,

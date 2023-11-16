@@ -64,27 +64,19 @@ main() {
 
     ###
     # OPTIONS
-    tmux set-option -g status on
-    tmux set-option -g status-justify left
-    tmux set-option -g status-position bottom
-    tmux set-option -g status-left-length 100
-    tmux set-option -g status-right-length 100
-
-    # How often status bar is refreshed in seconds, default: 15
-    tmux set-option -g status-interval 5
-
-    tmux set-window-option -g window-status-separator "  "
 
     ###
     # Color definitions
     # Based on tmux-snazzy: https://github.com/ivnvxd/tmux-snazzy/
-    
-    # status bar
-    tmux set-option -g status-style bg=$color_bg,fg=$color_fg
 
     # window title
+    tmux set-window-option -g window-status-separator "  "
     tmux set-window-option -g window-status-style fg=$color_cyan,bg=default,bright
     tmux set-window-option -g window-status-current-style fg=$color_green,bg=default,bright
+
+    # window status bar title
+    tmux setw -g window-status-format "#[fg=$color_gray]#I: #[noitalics]#W"
+    tmux setw -g window-status-current-format "#[fg=$color_magenta]#I: #[fg=$color_buffer,noitalics,bold]#W"
 
     # message text
     tmux set-option -g message-style bg=$color_blue,fg=$color_bg
@@ -103,12 +95,22 @@ main() {
     # clock
     tmux set-window-option -g clock-mode-colour $color_magenta
 
-    ###
-    # FORMAT
+    # status bar
+    tmux set-option -g status on
+    tmux set-option -g status-justify left
+    tmux set-option -g status-position bottom
+    tmux set-option -g status-interval 5
+    tmux set-option -g status-style bg=$color_bg,fg=$color_fg
+
+    # status bar left
+    tmux set-option -g status-left-length 100
+    tmux set-option -g status-left-style NONE
     tmux set-option -g status-left "#{prefix_highlight}#[bg=$color_bg] #S #[bg=$color_cyan,fg=$color_bg]#{simple_git_status}#[default] "
+
+    # status bar right
+    tmux set-option -g status-right-length 100
+    tmux set-option -g status-right-style NONE
     tmux set-option -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} | Session interval: #{continuum_status} "
-    tmux setw -g window-status-format "#[fg=$color_gray]#I: #[noitalics]#W"
-    tmux setw -g window-status-current-format "#[fg=$color_magenta]#I: #[fg=$color_buffer,noitalics,bold]#W"
 }
 
 main
