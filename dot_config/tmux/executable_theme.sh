@@ -43,8 +43,6 @@ main() {
     tmux set-option -g @prefix_highlight_empty_prompt "  TMUX  "
     tmux set-option -g @prefix_highlight_empty_attr "bg=$color_blue,fg=$color_bg"
 
-
-
     ## tmux cpu
     tmux set-option -g @cpu_percentage_format "CPU: %2.0f%%"
     tmux set-option -g @cpu_low_fg_color "#[fg=$color_green]"
@@ -110,7 +108,7 @@ main() {
     # status bar right
     tmux set-option -g status-right-length 100
     tmux set-option -g status-right-style NONE
-    tmux set-option -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} | Session interval: #{continuum_status} "
+    tmux set-option -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} #{?#{pane_ssh_connected},#[bg=$color_yellow],#[bg=$color_white]}#[fg=$color_bg] #U@#H "
 }
 
 main
