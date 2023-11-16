@@ -69,46 +69,59 @@ main() {
 
     # window title
     tmux set-window-option -g window-status-separator "  "
-    tmux set-window-option -g window-status-style fg=$color_cyan,bg=default,bright
-    tmux set-window-option -g window-status-current-style fg=$color_green,bg=default,bright
+    tmux set-window-option -g window-status-style fg="$color_cyan",bg=default,bright
+    tmux set-window-option -g window-status-current-style fg="$color_green",bg=default,bright
 
     # window status bar title
     tmux setw -g window-status-format "#[fg=$color_gray]#I: #[noitalics]#W"
     tmux setw -g window-status-current-format "#[fg=$color_magenta]#I: #[fg=$color_buffer,noitalics,bold]#W"
 
     # message text
-    tmux set-option -g message-style bg=$color_blue,fg=$color_bg
+    tmux set-option -g message-style bg="$color_blue,fg=$color_bg"
 
     # pane border
-    tmux set-option -g pane-border-style fg=$color_blue
-    tmux set-option -g pane-active-border-style fg=$color_green
+    tmux set-option -g pane-border-style fg="$color_blue"
+    tmux set-option -g pane-active-border-style fg="$color_green"
 
     # pane number
-    tmux set-option -g display-panes-active-colour $color_red
-    tmux set-option -g display-panes-colour $color_green
+    tmux set-option -g display-panes-active-colour "$color_red"
+    tmux set-option -g display-panes-colour "$color_green"
     
     # mode style
-    tmux set-window-option -g mode-style bg=$color_magenta,fg=$color_bg
+    tmux set-window-option -g mode-style bg="$color_magenta,fg=$color_bg"
 
     # clock
-    tmux set-window-option -g clock-mode-colour $color_magenta
+    tmux set-window-option -g clock-mode-colour "$color_magenta"
 
     # status bar
     tmux set-option -g status on
     tmux set-option -g status-justify left
     tmux set-option -g status-position bottom
     tmux set-option -g status-interval 5
-    tmux set-option -g status-style bg=$color_bg,fg=$color_fg
+    tmux set-option -g status-style bg="$color_bg,fg=$color_fg"
 
     # status bar left
     tmux set-option -g status-left-length 100
     tmux set-option -g status-left-style NONE
-    tmux set-option -g status-left "#{prefix_highlight}#[bg=$color_bg] #S #[bg=$color_cyan,fg=$color_bg]#{simple_git_status}#[default] "
+
+    local host_local="#[bg=$color_white#,fg=$color_bg] #H "
+    local host_remote="#[bg=$color_yellow#,fg=$color_bg] #H "
+
+    local ssh_status="#{?#{pane_ssh_connected},$host_remote,$host_local}#[default]"
+    local tmux_status="#{prefix_highlight}"
+    local git_status="#[bg=$color_cyan,fg=$color_bg]#{simple_git_status}#[default]"
+    local session_status=" #S "
+
+    tmux set-option -g status-left "$ssh_status$tmux_status $session_status $git_status "
 
     # status bar right
     tmux set-option -g status-right-length 100
     tmux set-option -g status-right-style NONE
-    tmux set-option -g status-right "#[fg=$color_gray]#{ram_percentage} | #{cpu_percentage} #{?#{pane_ssh_connected},#[bg=$color_yellow],#[bg=$color_white]}#[fg=$color_bg] #U@#H "
+
+    local resource_usage=" #[fg=$color_gray]#{ram_percentage}  #{cpu_percentage} #[default]"
+    local datetime="#[fg=$color_magenta] %H:%M #[default]"
+
+    tmux set-option -g status-right "$resource_usage $datetime"
 }
 
 main
