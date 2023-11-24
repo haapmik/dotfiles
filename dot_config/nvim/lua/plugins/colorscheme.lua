@@ -1,36 +1,36 @@
-local everblush = {
-  "Everblush/nvim",
-  name = "everblush",
-  lazy = false, -- make sure to load colorscheme during startup
-  priority = 1000,
-  config = function()
-    require("everblush").setup({
-      nvim_tree = {
-        contrast = true,
-      },
-    })
-    vim.cmd("colorscheme everblush")
-  end,
-}
+local function overrides(colors)
+  local theme = colors.theme
+  return {
+    NormalFloat = { bg = "none" },
+    FloatBorder = { bg = "none" },
+    FloatTitle = { bg = "none" },
 
-local solarized_osaka = {
-  "craftzdog/solarized-osaka.nvim",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("solarized-osaka").setup({
-      transparent = true,
-      terminal_colors = true,
-      styles = {
-        sidebars = "dark",
-        floats = "dark",
-      },
-      sidebars = { "Outline", "Trouble" },
-      dim_inactive = true,
-    })
-    vim.cmd("colorscheme solarized-osaka")
-  end,
-}
+    -- Save an hlgroup with dark background and dimmed foreground
+    -- so that you can use it where your still want darker windows.
+    -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
+    NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+
+    -- Popular plugins that open floats will link to NormalFloat by default;
+    -- set their background accordingly if you wish to keep them dark and borderless
+    LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+    MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+
+    -- Borderless Telescope UI
+    TelescopeTitle = { fg = theme.ui.special, bold = true },
+    TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+    TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+    TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+    TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+    TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+    TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+
+    -- Dark completion menu (popup)
+    Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+    PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+    PmenuSbar = { bg = theme.ui.bg_m1 },
+    PmenuThumb = { bg = theme.ui.bg_p2 },
+  }
+end
 
 local kanagawa = {
   "rebelot/kanagawa.nvim",
@@ -42,7 +42,20 @@ local kanagawa = {
       compile = true,
       undercurl = true,
       dimInactive = true,
-      theme = "wave", -- default when "background" not est
+      terminalColors = true,
+      theme = "wave", -- default when "background" not set
+      overrides = function(color)
+        return overrides(color)
+      end,
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
       background = {
         -- available options: "wave", "lotus", "dragon"
         dark = "wave",

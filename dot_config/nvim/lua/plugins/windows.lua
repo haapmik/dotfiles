@@ -7,7 +7,7 @@ local M = {
   },
   opts = {
     ignore = {
-      buftype = { "quickfix" },
+      buftype = { "quickfix", "OUTLINE", "Trouble" },
       filetype = { "Trouble", "Outline" },
     },
     autowidth = {
