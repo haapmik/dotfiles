@@ -90,7 +90,7 @@ function M.config()
       d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       t = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble document list" },
       T = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble workspace list" },
-      s = { "<cmd>SymbolsOutline<cr>", "Symbol list" },
+      s = { "<cmd>Outline<cr>", "Symbol list" },
       a = {
         function()
           vim.lsp.buf.code_action()

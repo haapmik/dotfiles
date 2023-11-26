@@ -30,6 +30,7 @@ function M.config()
       },
       theme = theme,
       file_ignore_patterns = file_ignore_patterns,
+      borderchars = { " " }, -- Enable borderless mode
     },
     pickers = {
       find_files = {
@@ -67,6 +68,7 @@ function M.config()
       },
       file_browser = {
         theme = theme,
+        borderchars = { " " }, -- Enable borderless mode
         hijack_netrw = true,
         grouped = true,
         hidden = true,
