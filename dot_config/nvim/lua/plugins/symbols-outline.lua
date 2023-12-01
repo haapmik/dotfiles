@@ -13,4 +13,4 @@ function M.config()
   })
 end
 
-return {}
+return M

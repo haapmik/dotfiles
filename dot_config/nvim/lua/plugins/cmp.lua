@@ -14,6 +14,13 @@ local M = {
     "octaltree/cmp-look",
     "petertriho/cmp-git",
     {
+      "zbirenbaum/copilot-cmp",
+      dependencies = "zbirenbaum/copilot.lua",
+      opts = {
+        fix_pairs = true, -- Default: true
+      },
+    },
+    {
       "saadparwaiz1/cmp_luasnip",
       dependencies = {
         {
@@ -22,14 +29,23 @@ local M = {
         },
       },
     },
-    "onsails/lspkind.nvim",
+    {
+      "onsails/lspkind.nvim",
+      config = function()
+        require("lspkind").init({
+          symbol_map = {
+            Copilot = "",
+          },
+        })
+        vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+      end,
+    },
     "windwp/nvim-autopairs",
   },
 }
 
 function M.config()
   local cmp = require("cmp")
-  local lspkind = require("lspkind")
 
   -- Default completion logic
   cmp.setup({
@@ -37,7 +53,7 @@ function M.config()
       completeopt = "menu,menuone,noinsert,noselect",
     },
     formatting = {
-      format = lspkind.cmp_format({
+      format = require("lspkind").cmp_format({
         mode = "symbol_text",
         menu = {
           buffer = "[Buffer]",
@@ -50,11 +66,14 @@ function M.config()
           cmd = "[Cmd]",
           cmd_history = "[CmdHistory]",
           nvim_lua = "[NvimLua]",
+          copilot = "[Copilot]",
         },
       }),
     },
     sorting = {
       comparators = {
+        require("copilot_cmp.comparators").prioritize,
+
         cmp.config.compare.offset,
         cmp.config.compare.exact,
         cmp.config.compare.score,
@@ -79,10 +98,11 @@ function M.config()
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
-    -- Default snippet sources
+    -- Default snippet sources for common files
     sources = {
+      { name = "copilot", priority = 100 },
       { name = "nvim_lsp", priority = 100 },
-      { name = "nvim_lsp_signature_help", priority = 90 },
+      { name = "nvim_lsp_signature_help", priority = 80 },
       { name = "luasnip", priority = 80 },
       { name = "path", priority = 80 },
       { name = "git", priority = 50 },
