@@ -100,9 +100,9 @@ function M.config()
     },
     -- Default snippet sources for common files
     sources = {
-      { name = "copilot", priority = 100 },
       { name = "nvim_lsp", priority = 100 },
       { name = "nvim_lsp_signature_help", priority = 80 },
+      { name = "copilot", priority = 90 },
       { name = "luasnip", priority = 80 },
       { name = "path", priority = 80 },
       { name = "git", priority = 50 },
