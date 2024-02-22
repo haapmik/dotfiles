@@ -15,12 +15,6 @@ export XDG_CACHE_HOME="${HOME}/.cache"      # User's /var/cache
 
 export ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 
-if command -v thefuck &> /dev/null; then
-  export THEFUCK_HISTORY_LIMIT='2000'
-  export THEFUCK_REQUIRE_CONFIRMATION='false'
-  export THEFUCK_WAIT_COMMAND=2
-fi
-
 # Locally installed binaries
 export PATH="${PATH}:${HOME}/.local/bin"
 
@@ -66,3 +60,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="${PATH}:/mnt/c/Users/$(whoami)/AppData/Local/Programs/Microsoft VS Code/bin"
 export PATH="${PATH}:/mnt/c/Windows/System32/copy.exe"
 #export PATH="${PATH}:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+
+# Anaconda
+export PATH="${PATH}:${XDG_DATA_HOME}/anaconda3/bin"

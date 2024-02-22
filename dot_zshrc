@@ -98,8 +98,6 @@ zi wait lucid for \
     zsh-users/zsh-autosuggestions
 zi wait pack atload=+"zicompinit; zicdreplay" for system-completions
 
-zi snippet OMZP::thefuck
-
 zi snippet OMZP::ssh-agent
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent lifetime 4h
@@ -123,7 +121,23 @@ zmodload -i zsh/sched
 schedprompt
 
 # bun completions
-[ -s "/home/mww1720/.local/share/bun/_bun" ] && source "/home/mww1720/.local/share/bun/_bun"
+[ -s "${HOME}/.local/share/bun/_bun" ] && source "${HOME}/.local/share/bun/_bun"
 
-eval $(thefuck --alias prkl)
-eval $(thefuck --alias fuck)
+# helm completions
+[ -s "${HOME}/.local/share/helm/zsh-completions/_helm" ] && source "${HOME}/.local/share/helm/zsh-completions/_helm"
+#
+# k9s completions
+[ -s "${HOME}/.local/share/k9s/zsh-completions/_k9s" ] && source "${HOME}/.local/share/k9s/zsh-completions/_k9s"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE='/home/mww1720/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/mww1720/.local/share/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<

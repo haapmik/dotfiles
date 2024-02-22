@@ -9,6 +9,7 @@ local M = {
     "lvimuser/lsp-inlayhints.nvim",
     "lukas-reineke/lsp-format.nvim",
     "hrsh7th/cmp-nvim-lsp",
+    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
   },
 }
 
@@ -69,6 +70,45 @@ function M.config()
     library = {
       plugins = { "neotest" },
       types = true,
+    },
+  })
+
+  require("sonarlint").setup({
+    server = {
+      cmd = {
+        "sonarlint-language-server",
+        -- Ensure that sonarlint-language-server uses stdio channel
+        "-stdio",
+        "-analyzers",
+        -- paths to the analyzers you need, using those for python and java in this example
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonargo.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarhtml.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonariac.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjs.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarlintomnisharp.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarphp.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonartext.jar"),
+        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarxml.jar"),
+      },
+    },
+    filetypes = {
+      -- Tested and working
+      "python",
+      "cpp",
+      "java",
+      "javascript",
+      "typescript",
+      "html",
+      "php",
+      "python",
+      "xml",
+      "yaml",
+      "css",
+      "kubernetes",
+      "terraform",
     },
   })
 
