@@ -9,7 +9,12 @@ local M = {
     "lvimuser/lsp-inlayhints.nvim",
     "lukas-reineke/lsp-format.nvim",
     "hrsh7th/cmp-nvim-lsp",
-    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    {
+      "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+      dependencies = {
+        "mfussenegger/nvim-jdtls",
+      },
+    },
   },
 }
 
